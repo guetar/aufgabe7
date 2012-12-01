@@ -1,4 +1,5 @@
 
+import java.awt.Dimension;
 import java.awt.geom.Point2D;
 import java.util.HashMap;
 
@@ -50,5 +51,30 @@ public class Track {
     
     public int getLimitColl() {
         return limitColl;
+    }
+    
+    public String toString() {
+        String res = "";
+        String topEnd = "";
+        
+        for (int i = 0; i < width+2; i++) {
+            topEnd += "*";
+        }
+        topEnd += "\n";
+        res += topEnd;
+        
+        for (int y = 0; y < height; y++) {
+            res += "*";
+            for (int x = 0; x < width; x++) {
+                CarQuick tmp = cars.get(new Point2D.Double(x,y));
+                if (tmp != null) {
+                    res += tmp.toString();
+                } else {
+                    res += " ";
+                }
+            }
+            res += "*\n";
+        }
+        return res += topEnd;
     }
 }

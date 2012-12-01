@@ -5,8 +5,8 @@
  */
 public class CarFlexible extends CarQuick {
     
-    public CarFlexible(int x, int y, char orientation, Track track) {
-        super(x, y, orientation, track);
+    public CarFlexible(int x, int y, char o, Track track) {
+        super(x, y, o, track);
     }
     
     @Override
@@ -14,9 +14,11 @@ public class CarFlexible extends CarQuick {
         
         switch(dir) {
             case 1:
+                verifyLimits();
                 left();
                 break;
             case 5:
+                verifyLimits();
                 right();
                 break;
             default:
@@ -27,7 +29,7 @@ public class CarFlexible extends CarQuick {
     
     private void left() {
         System.out.println("moved left");
-        switch(orientation) {
+        switch(o) {
             case 'n':
                 setPos(x()-1, y(), 'w');
                 break;
@@ -47,7 +49,7 @@ public class CarFlexible extends CarQuick {
     
     private void right() {
         System.out.println("moved right");
-        switch(orientation) {
+        switch(o) {
             case 'n':
                 setPos(x()+1, y(), 'o');
                 break;
