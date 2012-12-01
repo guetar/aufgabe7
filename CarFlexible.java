@@ -5,6 +5,10 @@
  */
 public class CarFlexible extends CarQuick {
     
+    public CarFlexible(Track track) {
+        super(track);
+    }
+    
     @Override
     public synchronized void move(int dir) {
         

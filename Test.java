@@ -10,11 +10,11 @@ public class Test {
         Track track = new Track(10, 20);
         
         //flexible car
-        track.setCar(0, 0, new CarFlexible());
+        track.setCar(0, 0, new CarFlexible(track));
         track.getCar(0, 0).move(1);
         
         //quick car
-        track.setCar(0, 1, new CarQuick());
+        track.setCar(0, 1, new CarQuick(track));
         track.getCar(0, 1).move(1);
     }
 }

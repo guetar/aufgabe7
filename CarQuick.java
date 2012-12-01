@@ -5,12 +5,10 @@
  */
 public class CarQuick extends Thread {
     
-    private int sleeptime=10;
+    protected Track track;
     
-    @Override
-    public void run(){
-    
-    
+    public CarQuick(Track track) {
+        this.track = track;
     }
     
     public synchronized void move(int dir) {
