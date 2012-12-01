@@ -80,7 +80,7 @@ public class CarQuick extends Thread {
         collisions--;
     }
     
-    public synchronized void move(int dir) {
+    public void move(int dir) {
         if(track.getLimitReached()) {
             return;
         }
