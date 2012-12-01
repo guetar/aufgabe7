@@ -9,17 +9,21 @@ import java.util.HashMap;
  */
 public class Track {
     
-    private HashMap<Point2D, CarQuick> cars;
+    private HashMap<Point2D.Double, CarQuick> cars;
     private int width;
     private int height;
+    private int limitMove;
+    private int limitColl;
     
-    public Track(int width, int height) {
-        cars = new HashMap<Point2D, CarQuick>();
+    public Track(int width, int height, int limitMove, int limitColl) {
+        cars = new HashMap<Point2D.Double, CarQuick>();
         this.width = width;
         this.height = height;
+        this.limitMove = limitMove;
+        this.limitColl = limitColl;
     }
     
-    public HashMap<Point2D, CarQuick> getCars() {
+    public HashMap<Point2D.Double, CarQuick> getCars() {
         return this.cars;
     }
     
@@ -29,5 +33,13 @@ public class Track {
     
     public int getHeight() {
         return height;
+    }
+    
+    public int getLimitMove() {
+        return limitMove;
+    }
+    
+    public int getLimitColl() {
+        return limitColl;
     }
 }

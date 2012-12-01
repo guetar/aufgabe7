@@ -12,6 +12,8 @@ public class CarQuick extends Thread {
     protected Track track;
     protected char orientation;
     protected Point2D.Double pos;
+    protected int movements;
+    protected int collisions;
     
     public CarQuick(int x, int y, char orientation, Track track) {
         this.pos = new Point2D.Double(x, y);
@@ -22,14 +24,21 @@ public class CarQuick extends Thread {
     public void setPos(int x, int y, char orientation) {
         if(x < 0 || x > track.getWidth() || y < 0 || y > track.getHeight()) {
             System.out.println("Out of Bounds!");
+            return;
+        }
+        
+        Point2D.Double newPos = new Point2D.Double(x, y);
+        
+        if(track.getCars().containsKey(newPos)) {
+            System.out.println("Collision!");
+            track.getCars().get(newPos).drivenInto();
+            driveInto();
+            return;
         }
         
         track.getCars().remove(pos);
         
         pos.setLocation(x, y);
-        if(track.getCars().containsKey(pos)) {
-            System.out.println("Collision!");
-        }
         this.orientation = orientation;
         
         track.getCars().put(pos, this);
@@ -47,7 +56,24 @@ public class CarQuick extends Thread {
         return (int) pos.getY();
     }
     
+    public void driveInto() {
+        collisions++;
+        if(collisions > track.getLimitColl()) {
+            System.out.println("Limit of collisions reached!");
+            return;
+        }
+    }
+    
+    public void drivenInto() {
+        collisions--;
+    }
+    
     public synchronized void move(int dir) {
+        movements++;
+        if(movements > track.getLimitMove()) {
+            System.out.println("Limit of Movements reached!");
+            return;
+        }
         
         switch(dir) {
             case 2:
@@ -116,7 +142,7 @@ public class CarQuick extends Thread {
                 setPos(x()-1, y()+1, 'w');
                 break;
             case 'w':
-                setPos(x()-1, y()+1, 'n');
+                setPos(x()-1, y()-1, 'n');
                 break;
             case 'o':
                 setPos(x()+1, y()-1, 's');
