@@ -67,6 +67,22 @@ public class CarQuick extends Thread {
     
     private void diagLeft() {
         System.out.println("moved diagLeft");
+        switch(orientation) {
+            case 'n':
+                setPos(x()-1, y()-1, 'w');
+                break;
+            case 's':
+                setPos(x()+1, y()+1, 'o');
+                break;
+            case 'w':
+                setPos(x()-1, y()+1, 's');
+                break;
+            case 'o':
+                setPos(x()+1, y()-1, 'n');
+                break;
+            default:
+                break;
+        }
     }
     
     private void forward() {
@@ -92,5 +108,21 @@ public class CarQuick extends Thread {
     
     private void diagRight() {
         System.out.println("moved diagRight");
+        switch(orientation) {
+            case 'n':
+                setPos(x()+1, y()-1, 'o');
+                break;
+            case 's':
+                setPos(x()-1, y()+1, 'w');
+                break;
+            case 'w':
+                setPos(x()-1, y()+1, 'n');
+                break;
+            case 'o':
+                setPos(x()+1, y()-1, 's');
+                break;
+            default:
+                break;
+        }
     }
 }
