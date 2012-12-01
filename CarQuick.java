@@ -23,16 +23,16 @@ public class CarQuick extends Thread {
         if(x < 0 || x > track.getWidth() || y < 0 || y > track.getHeight()) {
             System.out.println("Out of Bounds!");
         }
-        if(track.getCars().containsKey(getPos())) {
-            System.out.println("Collision!");
-        }
         
-        track.getCars().remove(getPos());
+        track.getCars().remove(pos);
         
         pos.setLocation(x, y);
+        if(track.getCars().containsKey(pos)) {
+            System.out.println("Collision!");
+        }
         this.orientation = orientation;
         
-        track.getCars().put(getPos(), this);
+        track.getCars().put(pos, this);
     }
     
     public Point2D.Double getPos() {
