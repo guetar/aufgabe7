@@ -18,6 +18,8 @@ public class CarQuick extends Thread {
     public CarQuick(int x, int y, char orientation, Track track) {
         this.pos = new Point2D.Double(x, y);
         this.orientation = orientation;
+        this.movements = 0;
+        this.collisions = 0;
         this.track = track;
     }
     
@@ -38,9 +40,10 @@ public class CarQuick extends Thread {
             || (orientation == 'w' && car.getOrient() == 'o')
             || (orientation == 'o' && car.getOrient() == 'w'))
             {
+                driveInto();
+            } else {
                 car.drivenInto();
             }
-            driveInto();
             return;
         }
         
