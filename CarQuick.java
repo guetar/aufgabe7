@@ -31,40 +31,41 @@ public class CarQuick extends Thread {
         Random rg=new Random();
         while(!track.getLimitReached()){
         int rand=rg.nextInt(3)+2;
-            move(rand);
+            
             try {
+                move(rand);
                 sleep(20);
             } catch (InterruptedException ex) {
                 System.out.println(ex.getMessage());
+            }
+            catch(OutOfBoundsException e){
+            
             }
         }
     
     }
     
-    public void setPos(int x, int y, char orientation) {
+    public void setPos(int x, int y, char orientation) throws OutOfBoundsException {
         if(x < 0 || x > track.getWidth() || y < 0 || y > track.getHeight()) {
-            System.out.println("Out of Bounds!");
-            System.out.println("x  = " + x + " | " + "y = " + y);
-            return;
+            throw new OutOfBoundsException();
         }
         synchronized(this){
-        Point2D.Double newPos = new Point2D.Double(x, y);
-        
-        if(track.getCars().containsKey(newPos)) {
-            System.out.println("Collision!");
-            
-            CarQuick car = track.getCars().get(newPos);
-            if((o == 'n' && car.getOrient() == 's')
-            || (o == 's' && car.getOrient() == 'n')
-            || (o == 'w' && car.getOrient() == 'o')
-            || (o == 'o' && car.getOrient() == 'w'))
-            {
-                driveInto();
-            } else {
-                car.drivenInto();
+            Point2D.Double newPos = new Point2D.Double(x, y);
+            try {
+                if (track.getCars().containsKey(newPos)) {
+                    throw new CollisionException();
+                }
+            } catch (CollisionException e) {
+                CarQuick car = track.getCars().get(newPos);
+                if ((o == 'n' && car.getOrient() == 's')
+                        || (o == 's' && car.getOrient() == 'n')
+                        || (o == 'w' && car.getOrient() == 'o')
+                        || (o == 'o' && car.getOrient() == 'w')) {
+                    driveInto();
+                } else {
+                    car.drivenInto();
+                }
             }
-            return;
-        }
         
         track.getCars().remove(pos);
         
@@ -118,7 +119,7 @@ public class CarQuick extends Thread {
         }
     }
     
-    public synchronized void move(int dir) {
+    public void move(int dir) throws OutOfBoundsException{
         verifyLimits();
         
         switch(dir) {
@@ -137,7 +138,7 @@ public class CarQuick extends Thread {
         }
     }
     
-    private void diagLeft() {
+    private void diagLeft() throws OutOfBoundsException{
         System.out.println("moved diagLeft");
         switch(o) {
             case 'n':
@@ -157,7 +158,7 @@ public class CarQuick extends Thread {
         }
     }
     
-    private void forward() {
+    private void forward() throws OutOfBoundsException{
         System.out.println("moved forward");
         switch(o) {
             case 'n':
@@ -177,7 +178,7 @@ public class CarQuick extends Thread {
         }
     }
     
-    private void diagRight() {
+    private void diagRight()throws OutOfBoundsException{
         System.out.println("moved diagRight");
         switch(o) {
             case 'n':

@@ -10,7 +10,7 @@ public class CarFlexible extends CarQuick {
     }
     
     @Override
-    public synchronized void move(int dir) {
+    public void move(int dir)  throws OutOfBoundsException{
         
         switch(dir) {
             case 1:
@@ -27,7 +27,7 @@ public class CarFlexible extends CarQuick {
         }
     }
     
-    private void left() {
+    private void left()  throws OutOfBoundsException{
         System.out.println("moved left");
         switch(o) {
             case 'n':
@@ -47,7 +47,7 @@ public class CarFlexible extends CarQuick {
         }
     }
     
-    private void right() {
+    private void right() throws OutOfBoundsException{
         System.out.println("moved right");
         switch(o) {
             case 'n':
