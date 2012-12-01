@@ -1,29 +1,33 @@
 
+import java.awt.geom.Point2D;
+import java.util.HashMap;
+
+
 /**
  *
  * @author guetar
  */
 public class Track {
     
-    //IV: gibt an, ob ein Auto die Maximalpunktezahl (10) erreicht hat, oder 
-    //ein Auto eine Maximalzahl an Feldwechseln ausgefuehrt hat
-    private boolean end=false;
-    private CarQuick[][] track;
+    private HashMap<Point2D, CarQuick> cars;
+    private int width;
+    private int height;
     
     public Track(int width, int height) {
-        track = new CarQuick[width][height];
+        cars = new HashMap<Point2D, CarQuick>();
+        this.width = width;
+        this.height = height;
     }
     
-    //NB: end wird auf true gesetzt und alle Threads sollen beendet werden
-    public void gameOver(){
-    end=true;
+    public HashMap<Point2D, CarQuick> getCars() {
+        return this.cars;
     }
     
-    public void setCar(int x, int y, CarQuick c) {
-        track[x][y] = c;
+    public int getWidth() {
+        return width;
     }
     
-    public CarQuick getCar(int x, int y) {
-        return track[x][y];
+    public int getHeight() {
+        return height;
     }
 }
