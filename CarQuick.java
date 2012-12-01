@@ -1,6 +1,9 @@
 
 import java.awt.geom.Point2D;
 import java.util.HashMap;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -21,12 +24,27 @@ public class CarQuick extends Thread {
         this.track = track;
     }
     
+    @Override
+    public void run(){
+        Random rg=new Random();
+        while(!track.getLimitReached()){
+        int rand=rg.nextInt(3)+2;
+            move(rand);
+            try {
+                sleep(20);
+            } catch (InterruptedException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    
+    }
+    
     public void setPos(int x, int y, char orientation) {
         if(x < 0 || x > track.getWidth() || y < 0 || y > track.getHeight()) {
             System.out.println("Out of Bounds!");
             return;
         }
-        
+        synchronized(this){
         Point2D.Double newPos = new Point2D.Double(x, y);
         
         if(track.getCars().containsKey(newPos)) {
@@ -50,6 +68,7 @@ public class CarQuick extends Thread {
         this.orientation = orientation;
         
         track.getCars().put(pos, this);
+        }
     }
     
     public Point2D.Double getPos() {
@@ -80,13 +99,14 @@ public class CarQuick extends Thread {
         collisions--;
     }
     
-    public synchronized void move(int dir) {
+    public void move(int dir) {
         if(track.getLimitReached()) {
             return;
         }
         
         movements++;
         if(movements > track.getLimitMove()) {
+            track.setLimitReached(true);
             System.out.println("Limit of Movements reached!");
             return;
         }
