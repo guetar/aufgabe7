@@ -24,14 +24,14 @@ public class CarQuick extends Thread {
     }
     
     private void diagLeft() {
-        
+        System.out.println("moved diagLeft");
     }
     
     private void forward() {
-        
+        System.out.println("moved forward");
     }
     
     private void diagRight() {
-        
+        System.out.println("moved diagRight");
     }
 }
