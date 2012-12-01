@@ -5,6 +5,12 @@
  */
 public class CarQuick extends Thread {
     
+    protected Track track;
+    
+    public CarQuick(Track track) {
+        this.track = track;
+    }
+    
     public synchronized void move(int dir) {
         
         switch(dir) {
