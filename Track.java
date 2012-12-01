@@ -1,21 +1,33 @@
 
+import java.awt.geom.Point2D;
+import java.util.HashMap;
+
+
 /**
  *
  * @author guetar
  */
 public class Track {
     
-    private CarQuick[][] track;
+    private HashMap<Point2D, CarQuick> cars;
+    private int width;
+    private int height;
     
     public Track(int width, int height) {
-        track = new CarQuick[width][height];
+        cars = new HashMap<Point2D, CarQuick>();
+        this.width = width;
+        this.height = height;
     }
     
-    public void setCar(int x, int y, CarQuick c) {
-        track[x][y] = c;
+    public HashMap<Point2D, CarQuick> getCars() {
+        return this.cars;
     }
     
-    public CarQuick getCar(int x, int y) {
-        return track[x][y];
+    public int getWidth() {
+        return width;
+    }
+    
+    public int getHeight() {
+        return height;
     }
 }

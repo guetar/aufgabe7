@@ -10,17 +10,16 @@ import java.util.HashMap;
 public class Test {
     
     public static void main(String[] args) {
-    
-        HashMap<Point2D, CarQuick> cars = new HashMap<Point2D, CarQuick>();
         
+        Track track = new Track(10, 20);
         //flexible car
-        CarFlexible carFlex = new CarFlexible(0, 0);
-        cars.put(carFlex.getPos(), carFlex);
+        CarFlexible carFlex = new CarFlexible(0, 0, 'n', track);
+        track.getCars().put(carFlex.getPos(), carFlex);
         carFlex.move(1);
         
         //quick car
-        CarQuick carQuick = new CarQuick(0, 1);
-        cars.put(carQuick.getPos(), carQuick);
+        CarQuick carQuick = new CarQuick(0, 1, 's', track);
+        track.getCars().put(carQuick.getPos(), carQuick);
         carQuick.move(1);
     }
 }

@@ -5,8 +5,8 @@
  */
 public class CarFlexible extends CarQuick {
     
-    public CarFlexible(int x, int y) {
-        super(x, y);
+    public CarFlexible(int x, int y, char orientation, Track track) {
+        super(x, y, orientation, track);
     }
     
     @Override
