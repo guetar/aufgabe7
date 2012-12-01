@@ -3,5 +3,5 @@
  *
  * @author guetar
  */
-public class CarQuick extends Thread {
+public class CarQuick extends Car {
 }
