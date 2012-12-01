@@ -26,19 +26,20 @@ public class CarQuick extends Thread {
                 diagRight();
                 break;
             default:
+                System.out.println("Cannot move in spezified direction!");
                 break;
         }
     }
     
     private void diagLeft() {
-        
+        System.out.println("moved diagLeft");
     }
     
     private void forward() {
-        
+        System.out.println("moved forward");
     }
     
     private void diagRight() {
-        
+        System.out.println("moved diagRight");
     }
 }

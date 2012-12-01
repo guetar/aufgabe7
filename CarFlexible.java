@@ -22,10 +22,10 @@ public class CarFlexible extends CarQuick {
     }
     
     private void left() {
-        
+        System.out.println("moved left");
     }
     
     private void right() {
-        
+        System.out.println("moved right");
     }
 }
