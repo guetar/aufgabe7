@@ -14,6 +14,7 @@ public class Track {
     private int height;
     private int limitMove;
     private int limitColl;
+    private boolean limitReached;
     
     public Track(int width, int height, int limitMove, int limitColl) {
         cars = new HashMap<Point2D.Double, CarQuick>();
@@ -25,6 +26,14 @@ public class Track {
     
     public HashMap<Point2D.Double, CarQuick> getCars() {
         return this.cars;
+    }
+    
+    public void setLimitReached(boolean r) {
+        this.limitReached = r;
+    }
+    
+    public boolean getLimitReached() {
+        return limitReached;
     }
     
     public int getWidth() {

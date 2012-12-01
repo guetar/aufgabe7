@@ -31,7 +31,15 @@ public class CarQuick extends Thread {
         
         if(track.getCars().containsKey(newPos)) {
             System.out.println("Collision!");
-            track.getCars().get(newPos).drivenInto();
+            
+            CarQuick car = track.getCars().get(newPos);
+            if((orientation == 'n' && car.getOrient() == 's')
+            || (orientation == 's' && car.getOrient() == 'n')
+            || (orientation == 'w' && car.getOrient() == 'o')
+            || (orientation == 'o' && car.getOrient() == 'w'))
+            {
+                car.drivenInto();
+            }
             driveInto();
             return;
         }
@@ -48,6 +56,10 @@ public class CarQuick extends Thread {
         return pos;
     }
     
+    public char getOrient() {
+        return orientation;
+    }
+    
     public int x() {
         return (int) pos.getX();
     }
@@ -58,9 +70,9 @@ public class CarQuick extends Thread {
     
     public void driveInto() {
         collisions++;
-        if(collisions > track.getLimitColl()) {
+        if(collisions >= track.getLimitColl()) {
             System.out.println("Limit of collisions reached!");
-            return;
+            track.setLimitReached(true);
         }
     }
     
@@ -69,6 +81,10 @@ public class CarQuick extends Thread {
     }
     
     public synchronized void move(int dir) {
+        if(track.getLimitReached()) {
+            return;
+        }
+        
         movements++;
         if(movements > track.getLimitMove()) {
             System.out.println("Limit of Movements reached!");
