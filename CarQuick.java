@@ -5,6 +5,14 @@
  */
 public class CarQuick extends Thread {
     
+    private int sleeptime=10;
+    
+    @Override
+    public void run(){
+    
+    
+    }
+    
     public synchronized void move(int dir) {
         
         switch(dir) {
