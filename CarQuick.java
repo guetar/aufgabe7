@@ -1,4 +1,7 @@
 
+import java.awt.geom.Point2D;
+
+
 /**
  *
  * @author guetar
@@ -6,9 +9,27 @@
 public class CarQuick extends Thread {
     
     protected Track track;
+    protected char orientation;
+    protected Point2D.Double pos;
     
-    public CarQuick(Track track) {
-        this.track = track;
+    public CarQuick(int x, int y) {
+        pos = new Point2D.Double(x, y);
+    }
+    
+    public void setPos(int x, int y) {
+        pos.setLocation(x, y);
+    }
+    
+    public Point2D.Double getPos() {
+        return pos;
+    }
+    
+    public int x() {
+        return (int) pos.getX();
+    }
+    
+    public int y() {
+        return (int) pos.getY();
     }
     
     public synchronized void move(int dir) {
@@ -35,6 +56,23 @@ public class CarQuick extends Thread {
     
     private void forward() {
         System.out.println("moved forward");
+        switch(orientation) {
+            case 'n':
+                setPos(x(), y()-1);
+                break;
+            case 's':
+                setPos(x(), y()+1);
+                break;
+            case 'w':
+                setPos(x()-1, y());
+                break;
+            case 'o':
+                setPos(x()+1, y());
+                break;
+            default:
+                break;
+        }
+        
     }
     
     private void diagRight() {

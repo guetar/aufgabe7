@@ -5,8 +5,8 @@
  */
 public class CarFlexible extends CarQuick {
     
-    public CarFlexible(Track track) {
-        super(track);
+    public CarFlexible(int x, int y) {
+        super(x, y);
     }
     
     @Override

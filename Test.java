@@ -1,4 +1,8 @@
 
+import java.awt.geom.Point2D;
+import java.util.HashMap;
+
+
 /**
  *
  * @author guetar
@@ -7,14 +11,16 @@ public class Test {
     
     public static void main(String[] args) {
     
-        Track track = new Track(10, 20);
+        HashMap<Point2D, CarQuick> cars = new HashMap<Point2D, CarQuick>();
         
         //flexible car
-        track.setCar(0, 0, new CarFlexible(track));
-        track.getCar(0, 0).move(1);
+        CarFlexible carFlex = new CarFlexible(0, 0);
+        cars.put(carFlex.getPos(), carFlex);
+        carFlex.move(1);
         
         //quick car
-        track.setCar(0, 1, new CarQuick(track));
-        track.getCar(0, 1).move(1);
+        CarQuick carQuick = new CarQuick(0, 1);
+        cars.put(carQuick.getPos(), carQuick);
+        carQuick.move(1);
     }
 }
