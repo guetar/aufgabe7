@@ -18,6 +18,7 @@ public class CarQuick extends Thread {
                 diagRight();
                 break;
             default:
+                System.out.println("Cannot move in spezified direction!");
                 break;
         }
     }
