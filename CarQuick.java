@@ -13,14 +13,16 @@ import java.util.logging.Logger;
 public class CarQuick extends Thread {
     
     protected Track track;
-    protected char orientation;
+    protected char o;
     protected Point2D.Double pos;
     protected int movements;
     protected int collisions;
     
-    public CarQuick(int x, int y, char orientation, Track track) {
+    public CarQuick(int x, int y, char o, Track track) {
         this.pos = new Point2D.Double(x, y);
-        this.orientation = orientation;
+        this.o = o;
+        this.movements = 0;
+        this.collisions = 0;
         this.track = track;
     }
     
@@ -42,6 +44,7 @@ public class CarQuick extends Thread {
     public void setPos(int x, int y, char orientation) {
         if(x < 0 || x > track.getWidth() || y < 0 || y > track.getHeight()) {
             System.out.println("Out of Bounds!");
+            System.out.println("x  = " + x + " | " + "y = " + y);
             return;
         }
         synchronized(this){
@@ -51,21 +54,22 @@ public class CarQuick extends Thread {
             System.out.println("Collision!");
             
             CarQuick car = track.getCars().get(newPos);
-            if((orientation == 'n' && car.getOrient() == 's')
-            || (orientation == 's' && car.getOrient() == 'n')
-            || (orientation == 'w' && car.getOrient() == 'o')
-            || (orientation == 'o' && car.getOrient() == 'w'))
+            if((o == 'n' && car.getOrient() == 's')
+            || (o == 's' && car.getOrient() == 'n')
+            || (o == 'w' && car.getOrient() == 'o')
+            || (o == 'o' && car.getOrient() == 'w'))
             {
+                driveInto();
+            } else {
                 car.drivenInto();
             }
-            driveInto();
             return;
         }
         
         track.getCars().remove(pos);
         
         pos.setLocation(x, y);
-        this.orientation = orientation;
+        this.o = o;
         
         track.getCars().put(pos, this);
         }
@@ -76,7 +80,7 @@ public class CarQuick extends Thread {
     }
     
     public char getOrient() {
-        return orientation;
+        return o;
     }
     
     public int x() {
@@ -99,7 +103,9 @@ public class CarQuick extends Thread {
         collisions--;
     }
     
-    public void move(int dir) {
+    public void verifyLimits() {
+//        System.out.println("x  = " + x() + " | " + "y = " + y() + " | " + "orientation = " + o);
+        
         if(track.getLimitReached()) {
             return;
         }
@@ -110,6 +116,10 @@ public class CarQuick extends Thread {
             System.out.println("Limit of Movements reached!");
             return;
         }
+    }
+    
+    public synchronized void move(int dir) {
+        verifyLimits();
         
         switch(dir) {
             case 2:
@@ -129,7 +139,7 @@ public class CarQuick extends Thread {
     
     private void diagLeft() {
         System.out.println("moved diagLeft");
-        switch(orientation) {
+        switch(o) {
             case 'n':
                 setPos(x()-1, y()-1, 'w');
                 break;
@@ -149,28 +159,27 @@ public class CarQuick extends Thread {
     
     private void forward() {
         System.out.println("moved forward");
-        switch(orientation) {
+        switch(o) {
             case 'n':
-                setPos(x(), y()-1, orientation);
+                setPos(x(), y()-1, o);
                 break;
             case 's':
-                setPos(x(), y()+1, orientation);
+                setPos(x(), y()+1, o);
                 break;
             case 'w':
-                setPos(x()-1, y(), orientation);
+                setPos(x()-1, y(), o);
                 break;
             case 'o':
-                setPos(x()+1, y(), orientation);
+                setPos(x()+1, y(), o);
                 break;
             default:
                 break;
         }
-        
     }
     
     private void diagRight() {
         System.out.println("moved diagRight");
-        switch(orientation) {
+        switch(o) {
             case 'n':
                 setPos(x()+1, y()-1, 'o');
                 break;
@@ -181,7 +190,7 @@ public class CarQuick extends Thread {
                 setPos(x()-1, y()-1, 'n');
                 break;
             case 'o':
-                setPos(x()+1, y()-1, 's');
+                setPos(x()+1, y()+1, 's');
                 break;
             default:
                 break;
