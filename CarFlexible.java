@@ -5,12 +5,12 @@
  */
 public class CarFlexible extends CarQuick {
     
-    public CarFlexible(int x, int y, char o, Track track) {
-        super(x, y, o, track);
+    public CarFlexible(String name, int x, int y, char o, Track track) {
+        super(name, x, y, o, track);
     }
     
     @Override
-    public synchronized void move(int dir) {
+    public void move(int dir)  throws OutOfBoundsException{
         
         switch(dir) {
             case 1:
@@ -27,8 +27,7 @@ public class CarFlexible extends CarQuick {
         }
     }
     
-    private void left() {
-        System.out.println("moved left");
+    private void left()  throws OutOfBoundsException{
         switch(o) {
             case 'n':
                 setPos(x()-1, y(), 'w');
@@ -45,10 +44,11 @@ public class CarFlexible extends CarQuick {
             default:
                 break;
         }
+        setPic(symbols.get(o));
+        System.out.println(name + " moved left");
     }
     
-    private void right() {
-        System.out.println("moved right");
+    private void right() throws OutOfBoundsException{
         switch(o) {
             case 'n':
                 setPos(x()+1, y(), 'o');
@@ -65,5 +65,7 @@ public class CarFlexible extends CarQuick {
             default:
                 break;
         }
+        setPic(symbols.get(o));
+        System.out.println(name + " moved right");
     }
 }
