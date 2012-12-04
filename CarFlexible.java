@@ -44,7 +44,6 @@ public class CarFlexible extends CarQuick {
     private int sqm = -1;
     //NB: return laesst auto auf quadratischer bahn mit halber seitenlaenge der
     //Strecke im Uhrzeigersinn fahren
-    @Override
     public int getMove() {
         sqm++;
         if (sqm == track.getHeight() / 2) {

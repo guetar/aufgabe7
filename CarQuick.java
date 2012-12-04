@@ -42,7 +42,7 @@ public class CarQuick extends Thread {
         while (!track.getLimitReached()) {
             try {
                 sleepWhileDrive();
-                move(getMove());
+                move(getRandMove());
             } catch (InterruptedException ex) {
                 System.out.println(ex.getMessage());
             } catch (OutOfBoundsException e) {
@@ -81,6 +81,7 @@ public class CarQuick extends Thread {
                     } else {
                         car.drivenInto();
                     }
+                    return;
                 }
 
                 track.getCars().remove(pos);
@@ -118,7 +119,7 @@ public class CarQuick extends Thread {
 
     public void driveInto() {
         collisions++;
-        System.out.println("COLLISION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("FRONT COLLISION!!!!!!!!!!!");
         if (collisions >= track.getLimitColl()) {
             System.out.println("Limit of collisions reached!");
             track.setLimitReached(true);
@@ -126,14 +127,15 @@ public class CarQuick extends Thread {
     }
 
     public void drivenInto() {
+        System.out.println("SIDE COLLISION!!!!!!!!!!!!");
         collisions--;
     }
 
-    public void verifyLimits() {
+    public boolean verifyLimits() {
 //        System.out.println("x  = " + x() + " | " + "y = " + y() + " | " + "orientation = " + o);
 
         if (track.getLimitReached()) {
-            return;
+            return false;
         }
 
         movements++;
