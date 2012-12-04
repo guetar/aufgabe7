@@ -28,11 +28,11 @@ public class CarFlexible extends CarQuick {
         
         switch(dir) {
             case 1:
-                if(verifyLimits())
+                //if(verifyLimits())
                 left();
                 break;
             case 5:
-                if(verifyLimits())
+                //if(verifyLimits())
                 right();
                 break;
             default:
@@ -44,7 +44,6 @@ public class CarFlexible extends CarQuick {
     private int sqm = -1;
     //NB: return laesst auto auf quadratischer bahn mit halber seitenlaenge der
     //Strecke im Uhrzeigersinn fahren
-    @Override
     public int getMove() {
         sqm++;
         if (sqm == track.getHeight() / 2) {
