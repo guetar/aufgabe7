@@ -7,7 +7,7 @@ public class Test {
     
     public static void main(String[] args) {
         
-        Track track = new Track(20, 10, 100, 2);
+        Track track = new Track(20, 10, 100, 10);
         
         //flexible car1
         CarFlexible carFlex1 = new CarFlexible("Flexo1", 8, 3, 's', track);

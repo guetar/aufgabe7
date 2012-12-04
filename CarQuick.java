@@ -83,12 +83,11 @@ public class CarQuick extends Thread {
                     System.out.println(track);
                 } catch (CollisionException e) {
                     CarQuick car = track.getCars().get(newPos);
-                    if ((o == 'n' && car.getOrient() == 's')
-                            || (o == 's' && car.getOrient() == 'n')
-                            || (o == 'w' && car.getOrient() == 'o')
-                            || (o == 'o' && car.getOrient() == 'w')) {
-                        driveInto();
-                    } else {
+                    driveInto();
+                    if ((o == 'n' && car.getOrient() != 's')
+                            || (o == 's' && car.getOrient() != 'n')
+                            || (o == 'w' && car.getOrient() != 'o')
+                            || (o == 'o' && car.getOrient() != 'w')) {
                         car.drivenInto();
                     }
                 }
