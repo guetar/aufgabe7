@@ -16,11 +16,11 @@ public class Test {
         CarFlexible carFlex2 = new CarFlexible("Flexo2", 11, 6, 'n', track);
         track.getCars().put(carFlex2.getPos(), carFlex2);
         
-        //flexible car2
+        //flexible car3
         CarFlexible carFlex3 = new CarFlexible("Flexo3", 6, 4, 'o', track);
         track.getCars().put(carFlex2.getPos(), carFlex3);
         
-        //flexible car2
+        //flexible car4
         CarFlexible carFlex4 = new CarFlexible("Flexo4", 9, 5, 'w', track);
         track.getCars().put(carFlex2.getPos(), carFlex4);
         
@@ -38,7 +38,7 @@ public class Test {
         CarQuick carQuick3 = new CarQuick("Speedo3", 6, 5, 'o', track);
         track.getCars().put(carQuick2.getPos(), carQuick3);
         
-        //quick car3
+        //quick car4
         CarQuick carQuick4 = new CarQuick("Speedo4", 9, 4, 'w', track);
         track.getCars().put(carQuick2.getPos(), carQuick4);
         
