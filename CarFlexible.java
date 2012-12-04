@@ -8,8 +8,8 @@ import java.util.Random;
  */
 public class CarFlexible extends CarQuick {
     
-    public CarFlexible(String name, int x, int y, char o, Track track) {
-        super(name, x, y, o, track);
+    public CarFlexible(String name, int x, int y, char o, Track track, DriveStyle style) {
+        super(name, x, y, o, track, style);
     }
     
     @Override
@@ -17,14 +17,9 @@ public class CarFlexible extends CarQuick {
         sleep(1500);
     }
     
-    //kann geloescht werden
-    public int getRandMove() {
-        Random rg=new Random();
-        return rg.nextInt(5)+1;
-    }
-    
     @Override
     public void move(int dir)  throws OutOfBoundsException{
+        // steff: Matthias seine Änderungen auskommentiert damits funzt bei mir.
         
         switch(dir) {
             case 1:
@@ -41,20 +36,6 @@ public class CarFlexible extends CarQuick {
         }
     }
     
-    private int sqm = -1;
-    //NB: return laesst auto auf quadratischer bahn mit halber seitenlaenge der
-    //Strecke im Uhrzeigersinn fahren
-    public int getMove() {
-        sqm++;
-        if (sqm == track.getHeight() / 2) {
-            sqm=-1;
-            return 5;
-        } else {
-            return 3;
-        }
-    }
-
-    //NB: pos=newPos, o=newOrientation    
     private void left()  throws OutOfBoundsException{
 //        System.out.println(name + " is moving left from " + posToString());
         switch(o) {
