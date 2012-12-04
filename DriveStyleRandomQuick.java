@@ -19,6 +19,7 @@ public class DriveStyleRandomQuick extends DriveStyle{
     }
 
     @Override
+    // Zufallszahl mit erweiterten Bereich fuer CarFlexibles zurueckgegeben
     public int getDirection() {
         return rng.nextInt(3) + 2; 
     }

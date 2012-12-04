@@ -19,8 +19,6 @@ public class CarFlexible extends CarQuick {
     
     @Override
     public void move(int dir)  throws OutOfBoundsException{
-        // steff: Matthias seine Änderungen auskommentiert damits funzt bei mir.
-        
         switch(dir) {
             case 1:
                 if(verifyLimits())

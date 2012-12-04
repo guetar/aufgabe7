@@ -9,6 +9,7 @@
  */
 public class DriveStyleRandomFlex extends DriveStyleRandomQuick {
     
+    // NB: Zufallszahl zurueckgegeben
     public int getDirection() {
         return rng.nextInt(5) + 1;
     }

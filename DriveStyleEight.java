@@ -18,7 +18,9 @@ public class DriveStyleEight extends DriveStyle {
     }
     
     @Override
+    // NB: Nach jedem viertem Aufruf dieser Methode aendert sich die Richtung
     public int getDirection() {
+        // Laesst das Auto in einer 8er Schleife fahren
         if (i >= 4) {
             left = !left;
             i = 0;

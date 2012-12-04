@@ -25,4 +25,9 @@ public class Point {
     public int getY() {
         return y;
     }
+
+    void setLocation(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 }

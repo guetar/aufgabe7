@@ -7,12 +7,14 @@ public class OutOfBoundsException extends Exception{
     
     private String name;
     
+    // VB: name != null
     public OutOfBoundsException(String name) {
         this.name = name;
     }
     
     @Override
+    // NB: return Name des Cars mit Fehlermeldung 
     public String getMessage(){
-    return name + ": Out of Bounds.";
+        return name + ": Out of Bounds.";
     }
 }
