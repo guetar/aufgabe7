@@ -69,7 +69,7 @@ public class CarQuick extends Thread {
         if (x < 0 || x >= track.getWidth() || y < 0 || y >= track.getHeight()) {
             throw new OutOfBoundsException(name);
         } else {
-            synchronized (track) {
+            synchronized (track.getCars()) {
                 Point2D.Double newPos = new Point2D.Double(x, y);
               
                 try {                   
