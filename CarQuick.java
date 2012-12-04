@@ -69,13 +69,13 @@ public class CarQuick extends Thread {
             synchronized (track) {
                 Point2D.Double newPos = new Point2D.Double(x, y);
                 try {
+                    this.o = orientation;
                     if (track.getCars().containsKey(newPos)) {
                         throw new CollisionException();
                     }
                     track.getCars().remove(pos);
                     pos.setLocation(x, y);
                     track.getCars().put(pos, this);
-                    this.o = orientation;
                     setPic(symbols.get(o));
 
                     System.out.println(name + " moved to " + posToString());
@@ -131,6 +131,7 @@ public class CarQuick extends Thread {
         collisions--;
     }
 
+    //NB: returns true wenn noch kein Limit erreicht wurde
     public boolean verifyLimits() {
 //        System.out.println("x  = " + x() + " | " + "y = " + y() + " | " + "orientation = " + o);
 
@@ -139,18 +140,16 @@ public class CarQuick extends Thread {
         }
 
         movements++;
-        if (movements > track.getLimitMove()) {
+        if (movements == track.getLimitMove()) {
             track.setLimitReached(true);
             System.out.println(name + " reached Limit of Movements!");
-            return false;
         }
         
         return true;
     }
 
     public void move(int dir) throws OutOfBoundsException {
-        verifyLimits();
-
+        if(verifyLimits())
         switch (dir) {
             case 2:
                 diagLeft();
