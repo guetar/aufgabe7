@@ -28,11 +28,11 @@ public class CarFlexible extends CarQuick {
         
         switch(dir) {
             case 1:
-                verifyLimits();
+                if(verifyLimits())
                 left();
                 break;
             case 5:
-                verifyLimits();
+                if(verifyLimits())
                 right();
                 break;
             default:

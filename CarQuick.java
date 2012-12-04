@@ -64,7 +64,7 @@ public class CarQuick extends Thread {
     }
     
     public void setPos(int x, int y, char orientation) throws OutOfBoundsException {
-        if(x < 0 || x > track.getWidth() || y < 0 || y > track.getHeight()) {
+        if(x < 0 || x >= track.getWidth() || y < 0 || y >= track.getHeight()) {
             throw new OutOfBoundsException();
         } else {
         synchronized(this){
@@ -131,24 +131,26 @@ public class CarQuick extends Thread {
         collisions--;
     }
     
-    public void verifyLimits() {
+    //NB: returns true, wenn Limits noch nicht erreicht wurden
+    public boolean verifyLimits() {
 //        System.out.println("x  = " + x() + " | " + "y = " + y() + " | " + "orientation = " + o);
         
         if(track.getLimitReached()) {
-            return;
+            return false;
         }
         
         movements++;
         if(movements > track.getLimitMove()) {
             track.setLimitReached(true);
             System.out.println(name + " reached Limit of Movements!");
-            return;
+            return false;
         }
+        
+        return true;
     }
     
     public void move(int dir) throws OutOfBoundsException{
-        verifyLimits();
-        
+        if(verifyLimits())
         switch(dir) {
             case 2:
                 diagLeft();
