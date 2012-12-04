@@ -44,7 +44,6 @@ public class CarQuick extends Thread {
             try {
                 sleepWhileDrive();
                 move(getRandMove());
-                System.out.println(track);
             } catch (InterruptedException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -64,11 +63,11 @@ public class CarQuick extends Thread {
         return rg.nextInt(3)+2;
     }
     
-    public synchronized void setPos(int x, int y, char orientation) throws OutOfBoundsException {
+    public void setPos(int x, int y, char orientation) throws OutOfBoundsException {
         if(x < 0 || x > track.getWidth() || y < 0 || y > track.getHeight()) {
             throw new OutOfBoundsException();
         } else {
-        //synchronized(this){
+        synchronized(this){
             Point2D.Double newPos = new Point2D.Double(x, y);
             try {
                 if (track.getCars().containsKey(newPos)) {
@@ -92,8 +91,12 @@ public class CarQuick extends Thread {
             this.o = orientation;
 
             track.getCars().put(pos, this);
-        //}
+            
+            System.out.println(name + " moved to " + posToString());
+            System.out.println(track);
+            }
         }
+        
     }
     
     public void setPic(char pic) {
@@ -163,7 +166,7 @@ public class CarQuick extends Thread {
     }
     
     private void diagLeft() throws OutOfBoundsException{
-        System.out.println(name + " wants to move diagLeft from " + posToString());
+        System.out.println(name + " is moving diagLeft from " + posToString());
         switch(o) {
             case 'n':
                 setPos(x()-1, y()-1, 'w');
@@ -181,11 +184,10 @@ public class CarQuick extends Thread {
                 break;
         }
         setPic(symbols.get(o));
-        System.out.println(name + " moved diagLeft to " + posToString());
     }
     
     private void forward() throws OutOfBoundsException{
-        System.out.println(name + " wants to move forward from " + posToString());
+        System.out.println(name + " is moving forward from " + posToString());
         switch(o) {
             case 'n':
                 setPos(x(), y()-1, o);
@@ -203,11 +205,10 @@ public class CarQuick extends Thread {
                 break;
         }
         setPic(symbols.get(o));
-        System.out.println(name + " moved forward to " + posToString());
     }
     
     private void diagRight()throws OutOfBoundsException{
-        System.out.println(name + " wants to move diagRight from " + posToString());
+        System.out.println(name + " is moving diagRight from " + posToString());
         switch(o) {
             case 'n':
                 setPos(x()+1, y()-1, 'o');
@@ -225,7 +226,6 @@ public class CarQuick extends Thread {
                 break;
         }
         setPic(symbols.get(o));
-        System.out.println(name + " moved diagRight to " + posToString());
     }
     
     public String toString() {
