@@ -142,10 +142,10 @@ public class CarQuick extends Thread {
         if (movements > track.getLimitMove()) {
             track.setLimitReached(true);
             System.out.println(name + " reached Limit of Movements!");
-            //return false;
+            return false;
         }
         
-        //return true;
+        return true;
     }
 
     public void move(int dir) throws OutOfBoundsException {
