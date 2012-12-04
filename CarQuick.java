@@ -79,7 +79,7 @@ public class CarQuick extends Thread {
                     track.getCars().put(pos, this);
                     setPic(symbols.get(o));
 
-                    System.out.println(name + " moved to " + posToString());
+//                    System.out.println(name + " moved to " + posToString());
                     System.out.println(track);
                 } catch (CollisionException e) {
                     CarQuick car = track.getCars().get(newPos);
@@ -87,8 +87,11 @@ public class CarQuick extends Thread {
                             || (o == 's' && car.getOrient() == 'n')
                             || (o == 'w' && car.getOrient() == 'o')
                             || (o == 'o' && car.getOrient() == 'w')) {
-                        driveInto();
+                        System.out.println("FRONT COLLISION!!!!!!!!!!! " + name + ": " + (collisions + 2));
+                        driveInto(2);
                     } else {
+                        System.out.println("SIDE COLLISION!!!!!!!!!!!! " + name + ": " + (collisions + 1));
+                        driveInto(1);
                         car.drivenInto();
                     }
                 }
@@ -118,9 +121,8 @@ public class CarQuick extends Thread {
         return (int) pos.getY();
     }
 
-    public void driveInto() {
-        collisions++;
-        System.out.println("FRONT COLLISION!!!!!!!!!!! " + collisions);
+    public void driveInto(int col) {
+        collisions += col;
         if (collisions >= track.getLimitColl()) {
             System.out.println("Limit of collisions reached!");
             track.setLimitReached(true);
@@ -128,7 +130,6 @@ public class CarQuick extends Thread {
     }
 
     public void drivenInto() {
-        System.out.println("SIDE COLLISION!!!!!!!!!!!! " + collisions);
         collisions--;
     }
 
@@ -168,7 +169,7 @@ public class CarQuick extends Thread {
     }
 
     private void diagLeft() throws OutOfBoundsException {
-        System.out.println(name + " is moving diagLeft from " + posToString());
+//        System.out.println(name + " is moving diagLeft from " + posToString());
         switch (o) {
             case 'n':
                 setPos(x() - 1, y() - 1, 'w');
@@ -188,7 +189,7 @@ public class CarQuick extends Thread {
     }
 
     private void forward() throws OutOfBoundsException {
-        System.out.println(name + " is moving forward from " + posToString());
+//        System.out.println(name + " is moving forward from " + posToString());
         switch (o) {
             case 'n':
                 setPos(x(), y() - 1, o);
@@ -208,7 +209,7 @@ public class CarQuick extends Thread {
     }
 
     private void diagRight() throws OutOfBoundsException {
-        System.out.println(name + " is moving diagRight from " + posToString());
+//        System.out.println(name + " is moving diagRight from " + posToString());
         switch (o) {
             case 'n':
                 setPos(x() + 1, y() - 1, 'o');
