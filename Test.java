@@ -25,21 +25,29 @@ public class Test {
         CarFlexible carFlex4 = new CarFlexible("Flexo4", 9, 5, 'w', track);
         track.getCars().put(carFlex4.getPos(), carFlex4);
         
-        //flexible car1
+        //flexible car5
         CarFlexible carFlex5 = new CarFlexible("Flexo5", 6, 1, 's', track);
         track.getCars().put(carFlex5.getPos(), carFlex5);
         
-        //flexible car2
+        //flexible car6
         CarFlexible carFlex6 = new CarFlexible("Flexo6", 7, 5, 'n', track);
         track.getCars().put(carFlex6.getPos(), carFlex6);
         
-        //flexible car3
+        //flexible car7
         CarFlexible carFlex7 = new CarFlexible("Flexo7", 2, 4, 'o', track);
         track.getCars().put(carFlex7.getPos(), carFlex7);
         
-        //flexible car4
+        //flexible car8
         CarFlexible carFlex8 = new CarFlexible("Flexo8", 13, 5, 'w', track);
         track.getCars().put(carFlex8.getPos(), carFlex8);
+        
+        //flexible car9
+        CarFlexible carFlex9 = new CarFlexible("Flexo9", 12, 2, 'o', track);
+        track.getCars().put(carFlex9.getPos(), carFlex9);
+        
+        //flexible car10
+        CarFlexible carFlex10 = new CarFlexible("Flexo10", 10, 9, 'w', track);
+        track.getCars().put(carFlex10.getPos(), carFlex10);
         
         
         
@@ -75,6 +83,14 @@ public class Test {
         CarQuick carQuick8 = new CarQuick("Speedo8", 5, 4, 'w', track);
         track.getCars().put(carQuick8.getPos(), carQuick8);
         
+        //quick car3
+        CarQuick carQuick9 = new CarQuick("Speedo9", 17, 5, 'o', track);
+        track.getCars().put(carQuick9.getPos(), carQuick9);
+        
+        //quick car4
+        CarQuick carQuick10 = new CarQuick("Speedo10", 13, 4, 'w', track);
+        track.getCars().put(carQuick10.getPos(), carQuick10);
+        
         
         
         System.out.println(track);
@@ -87,6 +103,8 @@ public class Test {
         carFlex6.start();
         carFlex7.start();
         carFlex8.start();
+        carFlex9.start();
+        carFlex10.start();
         
         carQuick1.start();
         carQuick2.start();
@@ -96,5 +114,7 @@ public class Test {
         carQuick6.start();
         carQuick7.start();
         carQuick8.start();
+        carQuick9.start();
+        carQuick10.start();
     }
 }

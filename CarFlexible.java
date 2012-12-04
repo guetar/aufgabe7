@@ -55,7 +55,7 @@ public class CarFlexible extends CarQuick {
     }
     
     private void left()  throws OutOfBoundsException{
-        System.out.println(name + " is moving left from " + posToString());
+//        System.out.println(name + " is moving left from " + posToString());
         switch(o) {
             case 'n':
                 setPos(x()-1, y(), 'w');
@@ -75,7 +75,7 @@ public class CarFlexible extends CarQuick {
     }
     
     private void right() throws OutOfBoundsException{
-        System.out.println(name + " is moving right from " + posToString());
+//        System.out.println(name + " is moving right from " + posToString());
         switch(o) {
             case 'n':
                 setPos(x()+1, y(), 'o');
