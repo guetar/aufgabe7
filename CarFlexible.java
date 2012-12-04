@@ -17,7 +17,7 @@ public class CarFlexible extends CarQuick {
         sleep(1500);
     }
     
-    @Override
+    //kann geloescht werden
     public int getRandMove() {
         Random rg=new Random();
         return rg.nextInt(5)+1;
@@ -28,16 +28,30 @@ public class CarFlexible extends CarQuick {
         
         switch(dir) {
             case 1:
-                verifyLimits();
+                if(verifyLimits())
                 left();
                 break;
             case 5:
-                verifyLimits();
+                if(verifyLimits())
                 right();
                 break;
             default:
                 super.move(dir);
                 break;
+        }
+    }
+    
+    private int sqm = -1;
+    //NB: return laesst auto auf quadratischer bahn mit halber seitenlaenge der
+    //Strecke im Uhrzeigersinn fahren
+    @Override
+    public int getMove() {
+        sqm++;
+        if (sqm == track.getHeight() / 2) {
+            sqm=-1;
+            return 5;
+        } else {
+            return 3;
         }
     }
     

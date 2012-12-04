@@ -42,7 +42,7 @@ public class CarQuick extends Thread {
         while (!track.getLimitReached()) {
             try {
                 sleepWhileDrive();
-                move(getRandMove());
+                move(getMove());
             } catch (InterruptedException ex) {
                 System.out.println(ex.getMessage());
             } catch (OutOfBoundsException e) {
@@ -140,8 +140,10 @@ public class CarQuick extends Thread {
         if (movements > track.getLimitMove()) {
             track.setLimitReached(true);
             System.out.println(name + " reached Limit of Movements!");
-            return;
+            return false;
         }
+        
+        return true;
     }
 
     public void move(int dir) throws OutOfBoundsException {
