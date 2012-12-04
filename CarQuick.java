@@ -63,6 +63,7 @@ public class CarQuick extends Thread {
     }
 
     public void setPos(int x, int y, char orientation) throws OutOfBoundsException {
+        this.o = orientation;         
         if (x < 0 || x >= track.getWidth() || y < 0 || y >= track.getHeight()) {
             throw new OutOfBoundsException(name);
         } else {
@@ -70,8 +71,8 @@ public class CarQuick extends Thread {
             // synchronized betrifft nämlich immer nur das EINE jeweilige OBJEKT.
             synchronized (track) {
                 Point2D.Double newPos = new Point2D.Double(x, y);
-                try {
-                    this.o = orientation;
+              
+                try {                   
                     if (track.getCars().containsKey(newPos)) {
                         throw new CollisionException();
                     }
