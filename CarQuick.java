@@ -21,6 +21,7 @@ public class CarQuick extends Thread {
     protected int collisions;
     protected HashMap<Character, Character> symbols;
 
+    //
     public CarQuick(String name, int x, int y, char o, Track track) {
         this.name = name;
         this.pos = new Point2D.Double(x, y);
@@ -65,6 +66,8 @@ public class CarQuick extends Thread {
         if (x < 0 || x > track.getWidth() || y < 0 || y > track.getHeight()) {
             throw new OutOfBoundsException(name);
         } else {
+            // steff: Hier track synchronisieren!! Dann funktionierts nämlich.
+            // synchronized betrifft nämlich immer nur das EINE jeweilige OBJEKT.
             synchronized (track) {
                 Point2D.Double newPos = new Point2D.Double(x, y);
                 try {
@@ -130,6 +133,9 @@ public class CarQuick extends Thread {
     }
 
     public void verifyLimits() {
+        // steff: Ich hab kurzfristig deine Änderungen auskommentiert, damits
+        // funkt.         
+        
 //        System.out.println("x  = " + x() + " | " + "y = " + y() + " | " + "orientation = " + o);
 
         if (track.getLimitReached()) {
