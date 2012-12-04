@@ -73,7 +73,6 @@ public class CarFlexible extends CarQuick {
             default:
                 break;
         }
-        setPic(symbols.get(o));
     }
     
     private void right() throws OutOfBoundsException{
