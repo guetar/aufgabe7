@@ -22,7 +22,8 @@ public class CarQuick extends Thread {
     protected HashMap<Character, Character> symbols;
     protected DriveStyle style;
 
-    //
+    //VB: name!=null, x!=null, y!=null, o!=null, track!=null
+    //NB: pic=orientation
     public CarQuick(String name, int x, int y, char o, Track track, DriveStyle style) {
         this.name = name;
         this.pos = new Point2D.Double(x, y);
@@ -52,11 +53,15 @@ public class CarQuick extends Thread {
                 System.out.println(e.getMessage());
             }
         }
-
     }
 
     public void sleepWhileDrive() throws InterruptedException {
         sleep(1000);
+    }
+
+    public int getRandMove() {
+        Random rg = new Random();
+        return rg.nextInt(3) + 2;
     }
 
     public void setPos(int x, int y, char orientation) throws OutOfBoundsException {
@@ -64,8 +69,6 @@ public class CarQuick extends Thread {
         if (x < 0 || x >= track.getWidth() || y < 0 || y >= track.getHeight()) {
             throw new OutOfBoundsException(name);
         } else {
-            // steff: Hier track synchronisieren!! Dann funktionierts nämlich.
-            // synchronized betrifft nämlich immer nur das EINE jeweilige OBJEKT.
             synchronized (track) {
                 Point2D.Double newPos = new Point2D.Double(x, y);
               
@@ -78,7 +81,7 @@ public class CarQuick extends Thread {
                     track.getCars().put(pos, this);
                     setPic(symbols.get(o));
 
-                    System.out.println(name + " moved to " + posToString());
+//                    System.out.println(name + " moved to " + posToString());
                     System.out.println(track);
                 } catch (CollisionException e) {
                     CarQuick car = track.getCars().get(newPos);
@@ -86,11 +89,13 @@ public class CarQuick extends Thread {
                             || (o == 's' && car.getOrient() == 'n')
                             || (o == 'w' && car.getOrient() == 'o')
                             || (o == 'o' && car.getOrient() == 'w')) {
-                        driveInto();
+                        System.out.println("FRONT COLLISION!!!!!!!!!!! " + name + ": " + (collisions + 2));
+                        driveInto(2);
                     } else {
+                        System.out.println("SIDE COLLISION!!!!!!!!!!!! " + name + ": " + (collisions + 1));
+                        driveInto(1);
                         car.drivenInto();
                     }
-                    return;
                 }
 
             }
@@ -118,9 +123,8 @@ public class CarQuick extends Thread {
         return (int) pos.getY();
     }
 
-    public void driveInto() {
-        collisions++;
-        System.out.println("FRONT COLLISION!!!!!!!!!!!");
+    public void driveInto(int col) {
+        collisions += col;
         if (collisions >= track.getLimitColl()) {
             System.out.println("Limit of collisions reached!");
             track.setLimitReached(true);
@@ -128,7 +132,6 @@ public class CarQuick extends Thread {
     }
 
     public void drivenInto() {
-        System.out.println("SIDE COLLISION!!!!!!!!!!!!");
         collisions--;
     }
 
@@ -168,7 +171,7 @@ public class CarQuick extends Thread {
     }
 
     private void diagLeft() throws OutOfBoundsException {
-        System.out.println(name + " is moving diagLeft from " + posToString());
+//        System.out.println(name + " is moving diagLeft from " + posToString());
         switch (o) {
             case 'n':
                 setPos(x() - 1, y() - 1, 'w');
@@ -188,7 +191,7 @@ public class CarQuick extends Thread {
     }
 
     private void forward() throws OutOfBoundsException {
-        System.out.println(name + " is moving forward from " + posToString());
+//        System.out.println(name + " is moving forward from " + posToString());
         switch (o) {
             case 'n':
                 setPos(x(), y() - 1, o);
@@ -208,7 +211,7 @@ public class CarQuick extends Thread {
     }
 
     private void diagRight() throws OutOfBoundsException {
-        System.out.println(name + " is moving diagRight from " + posToString());
+//        System.out.println(name + " is moving diagRight from " + posToString());
         switch (o) {
             case 'n':
                 setPos(x() + 1, y() - 1, 'o');
@@ -227,6 +230,7 @@ public class CarQuick extends Thread {
         }
     }
 
+    @Override
     public String toString() {
         String s = "" + pic;
         return s;
