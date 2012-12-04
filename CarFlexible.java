@@ -55,7 +55,8 @@ public class CarFlexible extends CarQuick {
                 break;
         }
     }
-    
+ 
+    //NB: pos=newPos, o=newOrientation   
     private void right() throws OutOfBoundsException{
 //        System.out.println(name + " is moving right from " + posToString());
         switch(o) {
