@@ -43,7 +43,7 @@ public class CarQuick extends Thread {
         while(!track.getLimitReached()){
             try {
                 sleepWhileDrive();
-                move(getRandMove());
+                move(getMove());
             } catch (InterruptedException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -58,11 +58,11 @@ public class CarQuick extends Thread {
         sleep(1000);
     }
     
-    public int getRandMove() {
+    public int getMove() {
         Random rg=new Random();
         return rg.nextInt(3)+2;
     }
-    
+       
     public void setPos(int x, int y, char orientation) throws OutOfBoundsException {
         if(x < 0 || x >= track.getWidth() || y < 0 || y >= track.getHeight()) {
             throw new OutOfBoundsException();

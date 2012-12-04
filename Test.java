@@ -7,9 +7,9 @@ public class Test {
     
     public static void main(String[] args) {
         
-        Track track = new Track(20, 10, 10, 2);
+        Track track = new Track(20, 10, 50, 2);
         //flexible car1
-        CarFlexible carFlex1 = new CarFlexible("Flexo1", 1, 1, 's', track);
+        CarFlexible carFlex1 = new CarFlexible("Flexo1", 11, 3, 's', track);
         track.getCars().put(carFlex1.getPos(), carFlex1);
         
         //flexible car2
