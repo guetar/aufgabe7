@@ -40,6 +40,8 @@ public class CarQuick extends Thread {
     }
 
     @Override
+    // VB: Alle Variablen != null
+    // NB: run muss durch while-Schleifen-Termination beendet werden
     public void run() {
         while (!track.getLimitReached()) {
             try {
@@ -53,13 +55,9 @@ public class CarQuick extends Thread {
         }
     }
 
+    // NB: Das Auto ist fuer 1 Sekunde "gefahren"
     public void sleepWhileDrive() throws InterruptedException {
         sleep(1000);
-    }
-
-    public int getRandMove() {
-        Random rg = new Random();
-        return rg.nextInt(3) + 2;
     }
 
     //VB: x!=null, y!=null, orientation!=null
@@ -69,6 +67,7 @@ public class CarQuick extends Thread {
         if (x < 0 || x >= track.getWidth() || y < 0 || y >= track.getHeight()) {
             throw new OutOfBoundsException(name);
         } else {
+            // Alle anderen Thread-Objekte in cars von track > STOP
             synchronized (track.getCars()) {
                 Point2D.Double newPos = new Point2D.Double(x, y);
               
@@ -81,7 +80,7 @@ public class CarQuick extends Thread {
                     track.getCars().put(pos, this);
                     setPic(symbols.get(o));
 
-//                    System.out.println(name + " moved to " + posToString());
+                    //System.out.println(name + " moved to " + posToString());
                     System.out.println(track);
                 } catch (CollisionException e) {
                     CarQuick car = track.getCars().get(newPos);
@@ -110,6 +109,8 @@ public class CarQuick extends Thread {
 
     }
 
+    // VB: Korrektes Character uebergeben (1 von 4 gueltige)
+    // NB: Character korrekt gesetzt
     public void setPic(char pic) {
         this.pic = pic;
     }
@@ -161,20 +162,21 @@ public class CarQuick extends Thread {
     }
 
     public void move(int dir) throws OutOfBoundsException {
-        if(verifyLimits())
-        switch (dir) {
-            case 2:
-                diagLeft();
-                break;
-            case 3:
-                forward();
-                break;
-            case 4:
-                diagRight();
-                break;
-            default:
-                System.out.println(name + " cannot move in specified direction!");
-                break;
+        if(verifyLimits()) {
+            switch (dir) {
+                case 2:
+                    diagLeft();
+                    break;
+                case 3:
+                    forward();
+                    break;
+                case 4:
+                    diagRight();
+                    break;
+                default:
+                    System.out.println(name + " cannot move in specified direction!");
+                    break;
+            }
         }
     }
 
@@ -242,11 +244,13 @@ public class CarQuick extends Thread {
     }
 
     @Override
+    // return ein Symbol von <,>,^,v
     public String toString() {
         String s = "" + pic;
         return s;
     }
 
+    // return Koordinaten in Form (x,y)
     public String posToString() {
         DecimalFormat d = new DecimalFormat("#");
         return "(" + d.format(pos.x) + "," + d.format(pos.y) + ")";

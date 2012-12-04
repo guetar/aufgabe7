@@ -13,6 +13,7 @@ public class CarFlexible extends CarQuick {
     }
     
     @Override
+    // NB: Das Auto ist fuer 1,5 Sekunden "gefahren"
     public void sleepWhileDrive() throws InterruptedException {
         sleep(1500);
     }
