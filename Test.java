@@ -7,7 +7,7 @@ public class Test {
     
     public static void main(String[] args) {
         
-        Track track = new Track(20, 10, 100, 10);
+        Track track = new Track(20, 10, 100, 3);
         
         //flexible car1
         CarFlexible carFlex1 = new CarFlexible("Flexo1", 8, 3, 's', track);
@@ -92,6 +92,10 @@ public class Test {
         track.getCars().put(carQuick10.getPos(), carQuick10);
         
         
+        //start race
+        System.out.println("Start race with a limit of ");
+        System.out.println(track.getLimitMove() + " movements and " + track.getLimitColl() + " collisions ...");
+        System.out.println("");
         
         System.out.println(track);
         

@@ -46,9 +46,9 @@ public class CarQuick extends Thread {
                 sleepWhileDrive();
                 move(getRandMove());
             } catch (InterruptedException ex) {
-                System.out.println(ex.getMessage());
+//                System.out.println(ex.getMessage());
             } catch (OutOfBoundsException e) {
-                System.out.println(e.getMessage());
+//                System.out.println(e.getMessage());
             }
         }
     }
@@ -87,10 +87,17 @@ public class CarQuick extends Thread {
                             || (o == 's' && car.getOrient() == 'n')
                             || (o == 'w' && car.getOrient() == 'o')
                             || (o == 'o' && car.getOrient() == 'w')) {
-                        System.out.println("FRONT COLLISION!!!!!!!!!!! " + name + ": " + (collisions + 2));
+                        
+                        System.out.println("FRONT COLLISION!");
+                        System.out.println(name + ": " + (collisions + 2));
+                        System.out.println("");
+                        
                         driveInto(2);
                     } else {
-                        System.out.println("SIDE COLLISION!!!!!!!!!!!! " + name + ": " + (collisions + 1));
+                        System.out.println("SIDE COLLISION!!");
+                        System.out.println(name + ": " + (collisions + 1));
+                        System.out.println("");
+                        
                         driveInto(1);
                         car.drivenInto();
                     }
@@ -125,6 +132,7 @@ public class CarQuick extends Thread {
         collisions += col;
         if (collisions >= track.getLimitColl()) {
             System.out.println("Limit of collisions reached!");
+            System.out.println("Winner is: " + name);
             track.setLimitReached(true);
         }
     }
