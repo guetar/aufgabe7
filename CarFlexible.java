@@ -53,7 +53,8 @@ public class CarFlexible extends CarQuick {
             return 3;
         }
     }
-    
+
+    //NB: pos=newPos, o=newOrientation    
     private void left()  throws OutOfBoundsException{
 //        System.out.println(name + " is moving left from " + posToString());
         switch(o) {
@@ -73,7 +74,8 @@ public class CarFlexible extends CarQuick {
                 break;
         }
     }
-    
+ 
+    //NB: pos=newPos, o=newOrientation   
     private void right() throws OutOfBoundsException{
 //        System.out.println(name + " is moving right from " + posToString());
         switch(o) {
@@ -92,6 +94,5 @@ public class CarFlexible extends CarQuick {
             default:
                 break;
         }
-        setPic(symbols.get(o));
     }
 }

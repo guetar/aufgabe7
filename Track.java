@@ -17,6 +17,7 @@ public class Track {
     private int limitColl;
     private boolean limitReached;
     
+    //VB: width!=null, height!=null, limitMove!=null, limitColl!=null
     public Track(int width, int height, int limitMove, int limitColl) {
         cars = new HashMap<Point2D.Double, CarQuick>();
         this.width = width;
@@ -25,35 +26,42 @@ public class Track {
         this.limitColl = limitColl;
     }
     
+    //NB: return HashMap=allCars
     public HashMap<Point2D.Double, CarQuick> getCars() {
         return this.cars;
     }
     
+    //NB: limitReached = true if limitColl reached, false otherwise
     public void setLimitReached(boolean r) {
         this.limitReached = r;
     }
     
+    //NB: return true if limitColl is reached, false otherwise
     public boolean getLimitReached() {
         return limitReached;
     }
     
+    //NB: width=width of Track
     public int getWidth() {
         return width;
     }
     
+    //NB: height=height of Track
     public int getHeight() {
         return height;
     }
     
+    //NB: limitMove=max allowed movements
     public int getLimitMove() {
         return limitMove;
     }
     
+    //NB: limitColl=max allowed collisions
     public int getLimitColl() {
         return limitColl;
     }
     
-    //VB: width < 30
+    //VB: width<30
     public synchronized String toString() {
         String res = "";
         String topEnd = "*";
