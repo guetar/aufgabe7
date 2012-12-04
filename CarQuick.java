@@ -21,6 +21,8 @@ public class CarQuick extends Thread {
     protected int collisions;
     protected HashMap<Character, Character> symbols;
 
+    //VB: name!=null, x!=null, y!=null, o!=null, track!=null
+    //NB: pic=orientation
     public CarQuick(String name, int x, int y, char o, Track track) {
         this.name = name;
         this.pos = new Point2D.Double(x, y);
@@ -49,7 +51,6 @@ public class CarQuick extends Thread {
                 System.out.println(e.getMessage());
             }
         }
-
     }
 
     public void sleepWhileDrive() throws InterruptedException {
@@ -118,7 +119,7 @@ public class CarQuick extends Thread {
 
     public void driveInto() {
         collisions++;
-        System.out.println("FRONT COLLISION!!!!!!!!!!!");
+        System.out.println("FRONT COLLISION!!!!!!!!!!! " + collisions);
         if (collisions >= track.getLimitColl()) {
             System.out.println("Limit of collisions reached!");
             track.setLimitReached(true);
@@ -126,7 +127,7 @@ public class CarQuick extends Thread {
     }
 
     public void drivenInto() {
-        System.out.println("SIDE COLLISION!!!!!!!!!!!!");
+        System.out.println("SIDE COLLISION!!!!!!!!!!!! " + collisions);
         collisions--;
     }
 
@@ -226,6 +227,7 @@ public class CarQuick extends Thread {
         }
     }
 
+    @Override
     public String toString() {
         String s = "" + pic;
         return s;
