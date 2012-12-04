@@ -3,8 +3,6 @@ import java.awt.geom.Point2D;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -62,6 +60,8 @@ public class CarQuick extends Thread {
         return rg.nextInt(3) + 2;
     }
 
+    //VB: x!=null, y!=null, orientation!=null
+    //NB: newPos=x,y, track.getCars()=updated
     public void setPos(int x, int y, char orientation) throws OutOfBoundsException {
         this.o = orientation;         
         if (x < 0 || x >= track.getWidth() || y < 0 || y >= track.getHeight()) {
@@ -176,6 +176,7 @@ public class CarQuick extends Thread {
         }
     }
 
+    //NB: pos=newPos, o=newOrientation
     private void diagLeft() throws OutOfBoundsException {
 //        System.out.println(name + " is moving diagLeft from " + posToString());
         switch (o) {
@@ -196,6 +197,7 @@ public class CarQuick extends Thread {
         }
     }
 
+    //NB: pos=newPos, o=newOrientation
     private void forward() throws OutOfBoundsException {
 //        System.out.println(name + " is moving forward from " + posToString());
         switch (o) {
@@ -216,6 +218,7 @@ public class CarQuick extends Thread {
         }
     }
 
+    //NB: pos=newPos, o=newOrientation
     private void diagRight() throws OutOfBoundsException {
 //        System.out.println(name + " is moving diagRight from " + posToString());
         switch (o) {
