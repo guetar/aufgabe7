@@ -9,7 +9,7 @@
  */
 public class DriveStyleRandomFlex extends DriveStyleRandomQuick {
     
-    public int getMove() {
+    public int getDirection() {
         return rng.nextInt(5) + 1;
     }
 }

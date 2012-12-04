@@ -20,15 +20,17 @@ public class CarQuick extends Thread {
     protected int movements;
     protected int collisions;
     protected HashMap<Character, Character> symbols;
+    protected DriveStyle style;
 
     //
-    public CarQuick(String name, int x, int y, char o, Track track) {
+    public CarQuick(String name, int x, int y, char o, Track track, DriveStyle style) {
         this.name = name;
         this.pos = new Point2D.Double(x, y);
         this.o = o;
         this.movements = 0;
         this.collisions = 0;
         this.track = track;
+        this.style = style;
 
         symbols = new HashMap<Character, Character>();
         symbols.put('n', '^');
@@ -43,7 +45,7 @@ public class CarQuick extends Thread {
         while (!track.getLimitReached()) {
             try {
                 sleepWhileDrive();
-                move(getRandMove());
+                move(style.getDirection());
             } catch (InterruptedException ex) {
                 System.out.println(ex.getMessage());
             } catch (OutOfBoundsException e) {
@@ -55,11 +57,6 @@ public class CarQuick extends Thread {
 
     public void sleepWhileDrive() throws InterruptedException {
         sleep(1000);
-    }
-
-    public int getRandMove() {
-        Random rg = new Random();
-        return rg.nextInt(3) + 2;
     }
 
     public void setPos(int x, int y, char orientation) throws OutOfBoundsException {

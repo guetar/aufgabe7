@@ -2,8 +2,6 @@
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 
 /**
@@ -32,17 +30,7 @@ public class Track {
     }
     
     public void setLimitReached(boolean r) {
-        synchronized(cars) {
-            this.limitReached = r;
-            if (r) {
-                Iterator it = cars.keySet().iterator();
-                while(it.hasNext()) {
-                    Map.Entry pair = (Map.Entry)it.next();
-                    CarQuick tmp = (CarQuick) pair.getValue();
-                    tmp.interrupt();
-                }
-            }
-        }
+        this.limitReached = r;
     }
     
     public boolean getLimitReached() {

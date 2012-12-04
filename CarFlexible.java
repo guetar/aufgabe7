@@ -8,19 +8,13 @@ import java.util.Random;
  */
 public class CarFlexible extends CarQuick {
     
-    public CarFlexible(String name, int x, int y, char o, Track track) {
-        super(name, x, y, o, track);
+    public CarFlexible(String name, int x, int y, char o, Track track, DriveStyle style) {
+        super(name, x, y, o, track, style);
     }
     
     @Override
     public void sleepWhileDrive() throws InterruptedException {
         sleep(1500);
-    }
-    
-    //kann geloescht werden
-    public int getRandMove() {
-        Random rg=new Random();
-        return rg.nextInt(5)+1;
     }
     
     @Override
@@ -39,19 +33,6 @@ public class CarFlexible extends CarQuick {
             default:
                 super.move(dir);
                 break;
-        }
-    }
-    
-    private int sqm = -1;
-    //NB: return laesst auto auf quadratischer bahn mit halber seitenlaenge der
-    //Strecke im Uhrzeigersinn fahren
-    public int getMove() {
-        sqm++;
-        if (sqm == track.getHeight() / 2) {
-            sqm=-1;
-            return 5;
-        } else {
-            return 3;
         }
     }
     

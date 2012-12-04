@@ -19,7 +19,7 @@ public class DriveStyleRandomQuick extends DriveStyle{
     }
 
     @Override
-    public int getMove() {
+    public int getDirection() {
         return rng.nextInt(3) + 2; 
     }
 }

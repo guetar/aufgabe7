@@ -9,5 +9,5 @@
  */
 public abstract class DriveStyle {
 
-    public abstract int getMove();
+    public abstract int getDirection();
 }
