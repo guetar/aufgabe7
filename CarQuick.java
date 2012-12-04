@@ -63,7 +63,7 @@ public class CarQuick extends Thread {
     }
 
     public void setPos(int x, int y, char orientation) throws OutOfBoundsException {
-        if (x < 0 || x > track.getWidth() || y < 0 || y > track.getHeight()) {
+        if (x < 0 || x >= track.getWidth() || y < 0 || y >= track.getHeight()) {
             throw new OutOfBoundsException(name);
         } else {
             // steff: Hier track synchronisieren!! Dann funktionierts nämlich.
@@ -74,6 +74,14 @@ public class CarQuick extends Thread {
                     if (track.getCars().containsKey(newPos)) {
                         throw new CollisionException();
                     }
+                    track.getCars().remove(pos);
+                    pos.setLocation(x, y);
+                    track.getCars().put(pos, this);
+                    this.o = orientation;
+                    setPic(symbols.get(o));
+
+                    System.out.println(name + " moved to " + posToString());
+                    System.out.println(track);
                 } catch (CollisionException e) {
                     CarQuick car = track.getCars().get(newPos);
                     if ((o == 'n' && car.getOrient() == 's')
@@ -87,14 +95,6 @@ public class CarQuick extends Thread {
                     return;
                 }
 
-                track.getCars().remove(pos);
-                pos.setLocation(x, y);
-                track.getCars().put(pos, this);
-                this.o = orientation;
-                setPic(symbols.get(o));
-
-                System.out.println(name + " moved to " + posToString());
-                System.out.println(track);
             }
         }
 
