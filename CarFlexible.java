@@ -1,4 +1,7 @@
 
+import java.util.Random;
+
+
 /**
  *
  * @author guetar
@@ -7,6 +10,17 @@ public class CarFlexible extends CarQuick {
     
     public CarFlexible(String name, int x, int y, char o, Track track) {
         super(name, x, y, o, track);
+    }
+    
+    @Override
+    public void sleepWhileDrive() throws InterruptedException {
+        sleep(1500);
+    }
+    
+    @Override
+    public int getRandMove() {
+        Random rg=new Random();
+        return rg.nextInt(5)+1;
     }
     
     @Override
@@ -28,6 +42,7 @@ public class CarFlexible extends CarQuick {
     }
     
     private void left()  throws OutOfBoundsException{
+        System.out.println(name + " wants to move left from " + posToString());
         switch(o) {
             case 'n':
                 setPos(x()-1, y(), 'w');
@@ -45,10 +60,11 @@ public class CarFlexible extends CarQuick {
                 break;
         }
         setPic(symbols.get(o));
-        System.out.println(name + " moved left");
+        System.out.println(name + " moved left to " + posToString());
     }
     
     private void right() throws OutOfBoundsException{
+        System.out.println(name + " wants to move right from " + posToString());
         switch(o) {
             case 'n':
                 setPos(x()+1, y(), 'o');
@@ -66,6 +82,6 @@ public class CarFlexible extends CarQuick {
                 break;
         }
         setPic(symbols.get(o));
-        System.out.println(name + " moved right");
+        System.out.println(name + " moved right to " + posToString());
     }
 }

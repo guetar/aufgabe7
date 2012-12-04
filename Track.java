@@ -53,11 +53,12 @@ public class Track {
         return limitColl;
     }
     
-    public String toString() {
+    //VB: width < 30
+    public synchronized String toString() {
         String res = "";
-        String topEnd = "";
+        String topEnd = "*";
         
-        for (int i = 0; i < width+2; i++) {
+        for (int i = 0; i < width+1; i++) {
             topEnd += "*";
         }
         topEnd += "\n";
@@ -73,8 +74,32 @@ public class Track {
                     res += " ";
                 }
             }
-            res += "*\n";
+            res += "*" + y + "\n";
         }
-        return res += topEnd;
+        
+        topEnd += " ";
+        
+        for (int i = 0; i < width; i++) {
+            if (i < 10) {
+                topEnd += i;
+            } else if (i < 20) {
+                topEnd += "1";
+            } else {
+                topEnd += "2";
+            }
+        } 
+        topEnd += "\n ";
+        
+        for (int i = 0; i < width; i++) {
+            if (i < 10) {
+                topEnd += " ";
+            } else if (i < 20) {
+                topEnd += i - 10;
+            } else {
+                topEnd += i - 20;
+            }
+        }
+        
+        return res += topEnd + "\n\n\n";
     }
 }

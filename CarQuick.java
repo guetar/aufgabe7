@@ -1,5 +1,6 @@
 
 import java.awt.geom.Point2D;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.logging.Level;
@@ -39,28 +40,35 @@ public class CarQuick extends Thread {
     
     @Override
     public void run(){
-        Random rg=new Random();
         while(!track.getLimitReached()){
-        int rand=rg.nextInt(3)+2;
-            
             try {
-                move(rand);
-                sleep(20);
+                sleepWhileDrive();
+                move(getRandMove());
+                System.out.println(track);
             } catch (InterruptedException ex) {
                 System.out.println(ex.getMessage());
             }
             catch(OutOfBoundsException e){
-            
+                System.out.println(e.getMessage());
             }
         }
     
     }
     
-    public void setPos(int x, int y, char orientation) throws OutOfBoundsException {
+    public void sleepWhileDrive() throws InterruptedException {
+        sleep(1000);
+    }
+    
+    public int getRandMove() {
+        Random rg=new Random();
+        return rg.nextInt(3)+2;
+    }
+    
+    public synchronized void setPos(int x, int y, char orientation) throws OutOfBoundsException {
         if(x < 0 || x > track.getWidth() || y < 0 || y > track.getHeight()) {
             throw new OutOfBoundsException();
-        }
-        synchronized(this){
+        } else {
+        //synchronized(this){
             Point2D.Double newPos = new Point2D.Double(x, y);
             try {
                 if (track.getCars().containsKey(newPos)) {
@@ -81,10 +89,10 @@ public class CarQuick extends Thread {
             track.getCars().remove(pos);
 
             pos.setLocation(x, y);
-            this.o = o;
+            this.o = orientation;
 
             track.getCars().put(pos, this);
-            System.out.println(track);
+        //}
         }
     }
     
@@ -155,6 +163,7 @@ public class CarQuick extends Thread {
     }
     
     private void diagLeft() throws OutOfBoundsException{
+        System.out.println(name + " wants to move diagLeft from " + posToString());
         switch(o) {
             case 'n':
                 setPos(x()-1, y()-1, 'w');
@@ -172,10 +181,11 @@ public class CarQuick extends Thread {
                 break;
         }
         setPic(symbols.get(o));
-        System.out.println(name + " moved diagLeft");
+        System.out.println(name + " moved diagLeft to " + posToString());
     }
     
     private void forward() throws OutOfBoundsException{
+        System.out.println(name + " wants to move forward from " + posToString());
         switch(o) {
             case 'n':
                 setPos(x(), y()-1, o);
@@ -193,10 +203,11 @@ public class CarQuick extends Thread {
                 break;
         }
         setPic(symbols.get(o));
-        System.out.println(name + " moved forward");
+        System.out.println(name + " moved forward to " + posToString());
     }
     
     private void diagRight()throws OutOfBoundsException{
+        System.out.println(name + " wants to move diagRight from " + posToString());
         switch(o) {
             case 'n':
                 setPos(x()+1, y()-1, 'o');
@@ -214,11 +225,16 @@ public class CarQuick extends Thread {
                 break;
         }
         setPic(symbols.get(o));
-        System.out.println(name + " moved diagRight");
+        System.out.println(name + " moved diagRight to " + posToString());
     }
     
     public String toString() {
         String s = ""+pic;
         return s;
+    }
+    
+    public String posToString() {
+        DecimalFormat d = new DecimalFormat("#");
+        return "("+d.format(pos.x)+","+d.format(pos.y)+")";
     }
 }
