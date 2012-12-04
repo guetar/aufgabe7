@@ -5,8 +5,14 @@
  */
 public class OutOfBoundsException extends Exception{
     
+    private String name;
+    
+    public OutOfBoundsException(String name) {
+        this.name = name;
+    }
+    
     @Override
     public String getMessage(){
-    return "Out of Bounds.";
+    return name + ": Out of Bounds.";
     }
 }
